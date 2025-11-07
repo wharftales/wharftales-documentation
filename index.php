@@ -9,6 +9,12 @@ header('X-Frame-Options: SAMEORIGIN');
 header('X-XSS-Protection: 1; mode=block');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 
+// Cache Control Headers (disable caching for development)
+// Comment out these lines in production for better performance
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Cache-Control: post-check=0, pre-check=0', false);
+header('Pragma: no-cache');
+
 // Load Parsedown libraries
 require_once __DIR__ . '/lib/Parsedown.php';
 require_once __DIR__ . '/lib/ParsedownExtra.php';
