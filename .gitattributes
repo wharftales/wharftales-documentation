@@ -1,0 +1,10 @@
+# Mantieni sempre le versioni locali della documentazione
+docs/** merge=ours
+assets/** merge=ours
+templates/** merge=ours
+
+# Mantieni sempre le versioni locali della cache o file generati
+cache/** merge=ours
+
+# Facoltativo: mantieni configurazioni locali
+config.php merge=ours
