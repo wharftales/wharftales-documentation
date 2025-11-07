@@ -8,11 +8,11 @@ If you've updated `config.php` but the remote server still shows the old version
 
 ### Step 1: Upload the Web Cache Clearer
 
-Upload `clear-cache-web.php` to your remote server.
+Upload `clear-cache.php` to your remote server.
 
 ### Step 2: Access via Browser
 
-Visit: `https://yoursite.com/clear-cache-web.php?password=wharfdocs2025`
+Visit: `https://yoursite.com/clear-cache.php?password=UseALongAndSecurePasswordHere`
 
 **Important:** Change the password in the file before uploading!
 
@@ -30,7 +30,7 @@ Press `Cmd+Shift+R` (Mac) or `Ctrl+Shift+R` (Windows/Linux)
 
 ### Step 5: Remove the File (Security!)
 
-After clearing cache, **delete** `clear-cache-web.php` from your server for security.
+After clearing cache, **delete** `clear-cache.php` from your server for security.
 
 ## Alternative Methods
 
@@ -125,12 +125,12 @@ Add to `.htaccess`:
 3. **CDN/Proxy cache** - If using Cloudflare, purge cache
 4. **Multiple PHP versions** - Ensure you're clearing cache for the right PHP version
 
-### "clear-cache-web.php shows 'Access denied'"
+### "clear-cache.php shows 'Access denied'"
 
 The password doesn't match. Edit the file and check:
 
 ```php
-$CLEAR_CACHE_PASSWORD = 'wharfdocs2025';
+$CLEAR_CACHE_PASSWORD = 'UseALongAndSecurePasswordHere';
 ```
 
 Change this to your own password.
@@ -144,9 +144,9 @@ This usually means:
 
 ## Security Checklist
 
-- [ ] Change password in `clear-cache-web.php`
-- [ ] Delete `clear-cache-web.php` after use
-- [ ] Don't commit `clear-cache-web.php` to public repositories
+- [ ] Change password in `clear-cache.php`
+- [ ] Delete `clear-cache.php` after use
+- [ ] Don't commit `clear-cache.php` to public repositories
 - [ ] Consider IP restriction for cache clearing scripts
 - [ ] Use `.htaccess` to protect sensitive files
 
@@ -176,7 +176,7 @@ php clear-cache.php
 sudo systemctl restart php-fpm
 
 # Or use web cache clearer
-curl "https://yoursite.com/clear-cache-web.php?password=YOUR_PASSWORD"
+curl "https://yoursite.com/clear-cache.php?password=YOUR_PASSWORD"
 
 echo "Deployment complete!"
 ```
