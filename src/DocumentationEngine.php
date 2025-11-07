@@ -151,7 +151,17 @@ class DocumentationEngine
             
             // Look for directory or file with numeric prefix
             $found = false;
+            
+            // Check if directory exists before scanning
+            if (!is_dir($currentPath)) {
+                return null;
+            }
+            
             $entries = scandir($currentPath);
+            
+            if ($entries === false) {
+                return null;
+            }
             
             foreach ($entries as $entry) {
                 if ($entry === '.' || $entry === '..') continue;
@@ -177,6 +187,11 @@ class DocumentationEngine
             $indexFiles = ['index.md', 'README.md'];
             foreach ($indexFiles as $indexFile) {
                 $entries = scandir($currentPath);
+                
+                if ($entries === false) {
+                    return null;
+                }
+                
                 foreach ($entries as $entry) {
                     $cleanName = preg_replace('/^\d+\./', '', $entry);
                     if ($cleanName === $indexFile && file_exists($currentPath . '/' . $entry)) {
