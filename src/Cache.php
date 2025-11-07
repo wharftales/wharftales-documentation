@@ -100,19 +100,45 @@ class Cache
      */
     public function clear()
     {
-        if (!$this->enabled || !is_dir($this->cacheDir)) {
+        if (!$this->enabled) {
             return false;
+        }
+
+        // Create cache directory if it doesn't exist
+        if (!is_dir($this->cacheDir)) {
+            mkdir($this->cacheDir, 0755, true);
+            return true; // Nothing to clear, but directory is ready
         }
 
         $files = glob($this->cacheDir . '/*.cache');
         
+        if ($files === false) {
+            return false; // glob failed
+        }
+        
+        $deletedCount = 0;
         foreach ($files as $file) {
-            if (is_file($file)) {
-                unlink($file);
+            if (is_file($file) && unlink($file)) {
+                $deletedCount++;
             }
         }
         
         return true;
+    }
+    
+    /**
+     * Get count of cached files
+     * 
+     * @return int Number of cache files
+     */
+    public function getCacheCount()
+    {
+        if (!$this->enabled || !is_dir($this->cacheDir)) {
+            return 0;
+        }
+        
+        $files = glob($this->cacheDir . '/*.cache');
+        return $files ? count($files) : 0;
     }
 
     /**
