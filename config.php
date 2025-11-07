@@ -25,12 +25,12 @@ return [
         'toc' => true,
     ],
     'cache' => [
-        'enabled' => true,
+        'enabled' => false,
         'directory' => __DIR__ . '/cache',
     ],
     'versions' => [
         'enabled' => true, // Set to false to disable versioning
-        'default' => 'v1.0', // Default version to show (null = latest)
+        'default' => 'v0.0.1', // Default version to show (null = latest)
         'show_selector' => true, // Show version selector in UI
         'label' => 'Version', // Label for version selector
     ]
