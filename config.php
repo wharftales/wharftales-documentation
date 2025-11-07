@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'site_name' => 'WharfDocs',
-    'site_description' => 'Modern Php Documentation System with Version support',
+    'site_name' => 'WharfTales Docs',
+    'site_description' => 'WharfTales Documentation',
     'theme' => 'default',
     'default_page' => 'getting-started/introduction',
     'github_repo' => 'https://github.com/wharftales/wharfdocs', // Set your GitHub repo URL for edit links
