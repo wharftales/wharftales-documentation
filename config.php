@@ -5,18 +5,18 @@ return [
     'site_description' => 'WharfTales Documentation',
     'theme' => 'default',
     'default_page' => 'getting-started/introduction',
-    'github_repo' => 'https://github.com/wharftales/wharfdocs', // Set your GitHub repo URL for edit links
+    'github_repo' => '', // Set your GitHub repo URL for edit links
     'logo' => '/assets/logo.svg', // Logo for light mode (leave empty to hide)
     'logo_dark' => '/assets/logo-dark.svg', // Logo for dark mode (leave empty to use light logo)
     'copyright' => 'WharfDocs is an open source project.', // Optional: Custom copyright text (leave empty for default)
     'social_links' => [
-        'github' => 'https://github.com/wharftales/wharfdocs',
+        'github' => 'https://github.com/wharftales/wharftales',
     ],
     'social_links_sidebar' => [
-        'github' => 'https://github.com/wharftales/wharfdocs',
+        'github' => 'https://github.com/wharftales/wharftales',
     ],
     'social_links_footer' => [
-        'github' => 'https://github.com/wharftales/wharfdocs',
+        'github' => 'https://github.com/wharftales/wharftales',
     ],
     'features' => [
         'search' => true,
@@ -25,12 +25,12 @@ return [
         'toc' => true,
     ],
     'cache' => [
-        'enabled' => false,
+        'enabled' => true,
         'directory' => __DIR__ . '/cache',
     ],
     'versions' => [
         'enabled' => true, // Set to false to disable versioning
-        'default' => 'v0.0.1', // Default version to show (null = latest)
+        'default' => '0.0.1', // Default version to show (null = latest)
         'show_selector' => true, // Show version selector in UI
         'label' => 'Version', // Label for version selector
     ]
