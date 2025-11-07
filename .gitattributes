@@ -1,4 +1,4 @@
-# Mantieni sempre le versioni locali della documentazione
+# Mantieni sempre le versioni locali della documentazione 
 docs/** merge=ours
 assets/** merge=ours
 templates/** merge=ours
