@@ -2,7 +2,7 @@
 
 return [
     'site_name' => 'WharfDocs',
-    'site_description' => 'Modern Php Documentation System',
+    'site_description' => 'Modern Php Documentation System with Version support',
     'theme' => 'default',
     'default_page' => 'getting-started/introduction',
     'github_repo' => 'https://github.com/wharftales/wharfdocs', // Set your GitHub repo URL for edit links
