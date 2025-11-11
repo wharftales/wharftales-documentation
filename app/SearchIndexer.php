@@ -7,11 +7,13 @@ class SearchIndexer
     private $docsPath;
     private $index;
     private $cache;
+    private $version;
 
-    public function __construct($docsPath, $cache = null)
+    public function __construct($docsPath, $cache = null, $version = null)
     {
         $this->docsPath = $docsPath;
         $this->cache = $cache;
+        $this->version = $version;
         $this->buildIndex();
     }
 
@@ -19,7 +21,8 @@ class SearchIndexer
     {
         // Try to get cached index
         if ($this->cache && $this->cache->isEnabled()) {
-            $cacheKey = 'search_index';
+            // Make cache key unique per version
+            $cacheKey = 'search_index_' . ($this->version ?? 'default');
             $cachedIndex = $this->cache->get($cacheKey, [$this->docsPath]);
             
             if ($cachedIndex !== null) {
@@ -45,8 +48,10 @@ class SearchIndexer
         
         // Cache the index
         if ($this->cache && $this->cache->isEnabled()) {
-            $this->cache->set('search_index', $this->index);
-            $this->cache->set('search_index_time', time());
+            // Make cache key unique per version
+            $cacheKey = 'search_index_' . ($this->version ?? 'default');
+            $this->cache->set($cacheKey, $this->index);
+            $this->cache->set($cacheKey . '_time', time());
         }
     }
 
@@ -110,7 +115,8 @@ class SearchIndexer
             'title' => $title,
             'headings' => $headings,
             'content' => $plainText,
-            'excerpt' => $this->createExcerpt($plainText)
+            'excerpt' => $this->createExcerpt($plainText),
+            'version' => $this->version
         ];
     }
 
@@ -182,7 +188,8 @@ class SearchIndexer
                     'path' => $doc['path'],
                     'title' => $doc['title'],
                     'excerpt' => $this->highlightExcerpt($doc['excerpt'], $query),
-                    'score' => $score
+                    'score' => $score,
+                    'version' => $doc['version']
                 ];
             }
         }

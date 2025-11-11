@@ -20,12 +20,12 @@ require_once __DIR__ . '/lib/Parsedown.php';
 require_once __DIR__ . '/lib/ParsedownExtra.php';
 
 // Load WharfDocs classes
-require_once __DIR__ . '/src/Cache.php';
-require_once __DIR__ . '/src/VersionManager.php';
-require_once __DIR__ . '/src/DocumentationEngine.php';
-require_once __DIR__ . '/src/MarkdownParser.php';
-require_once __DIR__ . '/src/NavigationBuilder.php';
-require_once __DIR__ . '/src/SearchIndexer.php';
+require_once __DIR__ . '/app/Cache.php';
+require_once __DIR__ . '/app/VersionManager.php';
+require_once __DIR__ . '/app/DocumentationEngine.php';
+require_once __DIR__ . '/app/MarkdownParser.php';
+require_once __DIR__ . '/app/NavigationBuilder.php';
+require_once __DIR__ . '/app/SearchIndexer.php';
 
 use WharfDocs\DocumentationEngine;
 

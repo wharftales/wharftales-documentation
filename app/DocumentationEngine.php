@@ -63,7 +63,7 @@ class DocumentationEngine
         // Initialize navigation and search for current version
         $versionDocsPath = $this->versionManager->getVersionDocsPath($this->currentVersion);
         $this->navigation = new NavigationBuilder($versionDocsPath, $this->cache);
-        $this->searchIndexer = new SearchIndexer($versionDocsPath, $this->cache);
+        $this->searchIndexer = new SearchIndexer($versionDocsPath, $this->cache, $this->currentVersion);
         
         // Remove version from path for file lookup
         $docPath = $this->versionManager->removeVersionFromPath($path);
@@ -327,19 +327,44 @@ class DocumentationEngine
 
     public function search($query, $version = null)
     {
-        // If version specified, search in that version
-        if ($version !== null) {
-            $versionDocsPath = $this->versionManager->getVersionDocsPath($version);
-            $searchIndexer = new SearchIndexer($versionDocsPath, $this->cache);
+        // If versioning is disabled, search in the base docs directory
+        if (!$this->versionManager->isVersioningEnabled()) {
+            $searchIndexer = new SearchIndexer($this->docsPath, $this->cache, null);
             return $searchIndexer->search($query);
         }
         
-        // Otherwise search in current version
-        if ($this->searchIndexer) {
-            return $this->searchIndexer->search($query);
+        // If specific version requested, search only in that version
+        if ($version !== null) {
+            $versionDocsPath = $this->versionManager->getVersionDocsPath($version);
+            $searchIndexer = new SearchIndexer($versionDocsPath, $this->cache, $version);
+            return $searchIndexer->search($query);
         }
         
-        return [];
+        // Search across all versions
+        $allResults = [];
+        $versions = $this->versionManager->getVersions();
+        
+        foreach ($versions as $versionInfo) {
+            $versionSlug = $versionInfo['slug'];
+            $versionDocsPath = $this->versionManager->getVersionDocsPath($versionSlug);
+            $searchIndexer = new SearchIndexer($versionDocsPath, $this->cache, $versionSlug);
+            $results = $searchIndexer->search($query);
+            
+            // Add version-prefixed paths to results
+            foreach ($results as &$result) {
+                $result['path'] = $versionSlug . '/' . $result['path'];
+            }
+            
+            $allResults = array_merge($allResults, $results);
+        }
+        
+        // Sort all results by score
+        usort($allResults, function ($a, $b) {
+            return $b['score'] <=> $a['score'];
+        });
+        
+        // Return top 10 results
+        return array_slice($allResults, 0, 10);
     }
 
     public function getNavigation()

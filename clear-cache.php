@@ -16,7 +16,7 @@ if ($password !== $CLEAR_CACHE_PASSWORD) {
     die('Access denied. Use: clear-cache.php?password=YOUR_PASSWORD');
 }
 
-require_once __DIR__ . '/src/Cache.php';
+require_once __DIR__ . '/app/Cache.php';
 
 use WharfDocs\Cache;
 
