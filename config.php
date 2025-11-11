@@ -13,7 +13,9 @@ return [
         'github' => 'https://github.com/wharftales/wharftales',
     ],
     'social_links_sidebar' => [
+        'website' => 'https://wharftales.com',
         'github' => 'https://github.com/wharftales/wharftales',
+        'twitter' => 'https://x.com/wharftales',
     ],
     'social_links_footer' => [
         'github' => 'https://github.com/wharftales/wharftales',
